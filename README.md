@@ -6,5 +6,11 @@ Features:
 - Made with no external libraries (extra lightweight, 5kb)
 - Work on CLI, no additional UI
 - random initial grid generation
+- choose tick speed (default: 0.1)
 - count interation
 - Recognize **stop of motion** and **recursion**
+
+Run the simulation:
+```
+python3 game-of-life-CLI.py
+```
