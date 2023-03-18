@@ -19,8 +19,11 @@ It is a zero-player game, meaning that its evolution is determined by its initia
 ./game-of-life-CLI.sh
 ```
 ## Screenshots:
+
 Menu:
+
 ![](menu.png)
 
 Simulation:
+
 ![](simulation.png)
