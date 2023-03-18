@@ -18,7 +18,7 @@ half_char = "▓▓"
 full_char = "██"
 
 #screen size
-gridwidth = 35
+gridwidth = 38
 gridheight = 19
 
 #variables initialization
@@ -101,7 +101,7 @@ def check_end():
 
         #print the final grid
         print(printgrid(pixelgrid))
-        print("Stopped at iteration ", counter)
+        print("Stopped at iteration ", counter, "\t\t\t   Press enter to go to menu")
 
         #wait any command to end
         input()
@@ -135,23 +135,106 @@ def check_recursion():
             recursion = True
 
 
-#-------------- START GRID GENERATION --------------#
+#----------------- GRID GENERATORS -----------------#
+
+def random_grid():
+    pixelgrid = [[empty_char for y in range (gridheight)] for x in range(gridwidth)]
+
+    #insert random object
+    for i in range(gridheight):
+        for j in range(gridwidth):
+            if r.randint(0,1) == 1: 
+                pixelgrid[j][i] = half_char
+            else:
+                pixelgrid[j][i] = empty_char
+    return pixelgrid
+
+def gosper_glider_gun_grid():
+    pixelgrid = [[empty_char for y in range (gridheight)] for x in range(gridwidth)]
+
+    pixelgrid[1][6] = half_char
+    pixelgrid[1][7] = half_char
+    pixelgrid[2][6] = half_char
+    pixelgrid[2][7] = half_char
+
+    pixelgrid[11][6] = half_char
+    pixelgrid[11][7] = half_char
+    pixelgrid[11][8] = half_char
+    pixelgrid[12][9] = half_char
+    pixelgrid[13][10] = half_char
+    pixelgrid[14][10] = half_char
+    pixelgrid[16][9] = half_char
+    pixelgrid[17][8] = half_char
+    pixelgrid[18][7] = half_char
+    pixelgrid[17][7] = half_char
+    pixelgrid[15][7] = half_char
+    pixelgrid[17][6] = half_char
+    pixelgrid[16][5] = half_char
+    pixelgrid[14][4] = half_char
+    pixelgrid[13][4] = half_char
+    pixelgrid[12][5] = half_char
+
+    pixelgrid[21][6] = half_char
+    pixelgrid[21][5] = half_char
+    pixelgrid[21][4] = half_char
+    pixelgrid[22][6] = half_char
+    pixelgrid[22][5] = half_char
+    pixelgrid[22][4] = half_char
+    pixelgrid[23][3] = half_char
+    pixelgrid[23][7] = half_char
+    pixelgrid[25][3] = half_char
+    pixelgrid[25][7] = half_char
+    pixelgrid[25][2] = half_char
+    pixelgrid[25][8] = half_char
+
+    pixelgrid[35][4] = half_char
+    pixelgrid[35][5] = half_char
+    pixelgrid[36][4] = half_char
+    pixelgrid[36][5] = half_char
+
+    return pixelgrid
+
+
+#------------------ PROGRAM START ------------------#
 
 #flush terminal
-os.system('clear')
 
-#generate empty grid
-pixelgrid = [[empty_char for y in range (gridheight)] for x in range(gridwidth)]
+grids = [random_grid, gosper_glider_gun_grid]
 
-#insert random object
-for i in range(gridheight):
-    for j in range(gridwidth):
-        if r.randint(0,1) == 1: 
-            pixelgrid[j][i] = half_char
-        else:
-            pixelgrid[j][i] = empty_char
+
+#ask for grid type
+while True:
+    os.system('clear')
+    
+    print("""
+   ____                               __   _     _  __      
+  / ___| __ _ _ __ ___   ___    ___  / _| | |   (_)/ _| ___ 
+ | |  _ / _` | '_ ` _ \ / _ \  / _ \| |_  | |   | | |_ / _ \\
+ | |_| | (_| | | | | | |  __/ | (_) |  _| | |___| |  _|  __/
+  \____|\__,_|_| |_| |_|\___|  \___/|_|   |_____|_|_|  \___| 
+
+                                            by Antonio Pelusi
+
+    |0| Random grid
+    |1| Gosper glider gun
+
+                                       Press CTRL + Z to exit
+
+    """)
+    try:
+        print("Choose a valid grid type: ")
+        i = int(input("> "))
+
+        if i>=0 and i<len(grids):
+            break
+
+    except Exception:
+        pass
+
+pixelgrid = grids[i]()
 
 #print initial grid
+os.system('clear')
 print(printgrid(pixelgrid))
 
 #ask for tick time
@@ -159,7 +242,6 @@ try:
     tick_time = float(input("Insert tick speed to start (default: 0.1): "))
 except ValueError:
     tick_time = 0.1
-
 
 #-------------------- MAIN LOOP --------------------#
 
@@ -205,9 +287,9 @@ while True:
     #check if a recursion has occurred
     if recursion == False:
         counter += 1
-        print("Iteration count:", counter)
+        print("Iteration count:", counter, "\t\t\t\t\tPress CTRL + C to stop")
     else:
-        print("Recursion found at iteration", counter)
+        print("Recursion found at iteration", counter, "\t\t\tPress CTRL + C to stop")
 
     #wait the tick time
     t.sleep(tick_time)
