@@ -26,4 +26,4 @@ Menu:
 
 Simulation:
 
-![](simulation.png)
+![](simulation.gif)
