@@ -1,4 +1,4 @@
-# Game of Life ![](Earth.gif)🌍
+# Game of Life 🌍
 Game of Life is a **cellular automaton** devised by the British mathematician *John Horton Conway* in 1970.
 It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.
 
@@ -18,8 +18,8 @@ It is a zero-player game, meaning that its evolution is determined by its initia
 ```
 ./game-of-life-CLI.sh
 ```
-If is not Linux (Ctrl + C and Ctrl + Z shortcuts will not work):
 
+Or, if is not Linux (Ctrl + C and Ctrl + Z shortcuts will not work):
 ```
 python3 game-of-life-CLI.py
 ```
